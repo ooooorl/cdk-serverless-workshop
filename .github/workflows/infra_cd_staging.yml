@@ -8,6 +8,10 @@ on:
       - "infra/**"
       - "lambdas/**"
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     name: Deploy Infrastructure to Staging

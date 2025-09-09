@@ -1,11 +1,11 @@
 name: Frontend Production CD Pipeline
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "frontend/**"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   deploy:

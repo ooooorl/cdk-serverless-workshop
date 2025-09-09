@@ -11,6 +11,9 @@ interface CloudfrontConstructProps extends BaseConstructProps {
 }
 
 export class CloudfrontConstruct extends Construct {
+  public frontendDistribution: cloudfront.Distribution;
+  public apiDistribution: cloudfront.Distribution;
+
   constructor(scope: Construct, id: string, props: CloudfrontConstructProps) {
     super(scope, id);
 
@@ -19,7 +22,7 @@ export class CloudfrontConstruct extends Construct {
   }
 
   private createFrontendDistribution(props: CloudfrontConstructProps): void {
-    new cloudfront.Distribution(
+    this.frontendDistribution = new cloudfront.Distribution(
       this,
       `${props.stage}-Cloudfront-Distribution-Frontend`,
       {
@@ -34,7 +37,7 @@ export class CloudfrontConstruct extends Construct {
   }
 
   private createApiDistribution(props: CloudfrontConstructProps): void {
-    new cloudfront.Distribution(
+    this.apiDistribution = new cloudfront.Distribution(
       this,
       `${props.stage}-Cloudfront-Distribution-Api`,
       {

@@ -1,0 +1,36 @@
+name: Frontend CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "frontend/**"
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+        working-directory: frontend
+
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: frontend
+
+      - name: Run Lint
+        run: pnpm run lint
+        working-directory: frontend
+
+      - name: Build
+        run: pnpm run build
+        working-directory: frontend

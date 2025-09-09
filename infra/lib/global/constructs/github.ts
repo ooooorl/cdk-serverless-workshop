@@ -145,5 +145,20 @@ export class GithubConstruct extends Construct {
         resources: ["*"],
       }),
     );
+
+    this.githubActionsRole.addToPolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [
+          "ssm:GetParameter",
+          "ssm:GetParameters",
+          "ssm:GetParametersByPath",
+        ],
+        resources: [
+          "arn:aws:ssm:us-east-1:381492218855:parameter/cdk-bootstrap/*",
+          "arn:aws:ssm:ap-southeast-1:381492218855:parameter/cdk-bootstrap/*",
+        ],
+      }),
+    );
   }
 }

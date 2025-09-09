@@ -1,0 +1,17 @@
+name: Frontend Production CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "frontend/**"
+
+jobs:
+  deploy:
+    name: Deploy Frontend to Production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4

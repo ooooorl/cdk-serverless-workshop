@@ -1,0 +1,45 @@
+name: Infrastructure Continuous Integration Pipeline
+
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate:
+    name: Validate Infrastructure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::767950116421:role/GithubCDKDeploymentRole-hibi-infra-staging
+          role-session-name: GitHubActions-CDK
+          aws-region: ${{ env.AWS_REGION }}
+        continue-on-error: true
+
+      - name: CDK Synth
+        run: |
+          npm run synth:staging
+
+      - name: CDK Diff
+        run: |
+          npm run diff:staging

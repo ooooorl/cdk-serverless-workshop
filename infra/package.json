@@ -9,8 +9,10 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "diff:staging": "npm run cdk -- diff staging-GlobalStack --require-approval never",
-    "diff:prod": "npm run cdk -- diff prod-GlobalStack --require-approval never",
+    "synth:staging": "npm run cdk -- synth staging-GlobalStack",
+    "synth:prod": "npm run cdk -- synth prod-GlobalStack",
+    "diff:staging": "npm run cdk -- diff staging-GlobalStack",
+    "diff:prod": "npm run cdk -- diff prod-GlobalStack",
     "deploy:staging": "npm run cdk -- deploy staging-GlobalStack --require-approval never",
     "deploy:prod": "npm run cdk -- deploy prod-GlobalStack --require-approval never"
   },

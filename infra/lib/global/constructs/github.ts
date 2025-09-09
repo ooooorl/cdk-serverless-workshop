@@ -47,6 +47,14 @@ export class GithubConstruct extends Construct {
   private addPolicies(props: GithubConstructProps) {
     this.githubActionsRole.addToPolicy(
       new iam.PolicyStatement({
+        actions: ["sts:AssumeRole"],
+        effect: iam.Effect.ALLOW,
+        resources: [`arn:aws:iam::*:role/cdk*`],
+      }),
+    );
+
+    this.githubActionsRole.addToPolicy(
+      new iam.PolicyStatement({
         actions: [
           "s3:PutObject",
           "s3:GetObject",

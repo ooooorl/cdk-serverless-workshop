@@ -17,44 +17,44 @@ export class CloudfrontConstruct extends Construct {
   constructor(scope: Construct, id: string, props: CloudfrontConstructProps) {
     super(scope, id);
 
-    // this.createFrontendDistribution(props);
-    // this.createApiDistribution(props);
+    this.createFrontendDistribution(props);
+    this.createApiDistribution(props);
   }
 
-  // private createFrontendDistribution(props: CloudfrontConstructProps): void {
-  //   this.frontendDistribution = new cloudfront.Distribution(
-  //     this,
-  //     `${props.stage}-Cloudfront-Distribution-Frontend`,
-  //     {
-  //       defaultBehavior: {
-  //         origin: new origins.S3StaticWebsiteOrigin(props.frontendBucket),
-  //         cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
-  //         viewerProtocolPolicy:
-  //           cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-  //       },
-  //     },
-  //   );
-  // }
-  //
-  // private createApiDistribution(props: CloudfrontConstructProps): void {
-  //   this.apiDistribution = new cloudfront.Distribution(
-  //     this,
-  //     `${props.stage}-Cloudfront-Distribution-Api`,
-  //     {
-  //       defaultBehavior: {
-  //         origin: new origins.HttpOrigin(
-  //           cdk.Fn.select(2, cdk.Fn.split("/", props.apiEndpoint)),
-  //           {
-  //             originPath: "/",
-  //           },
-  //         ),
-  //         cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
-  //         allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
-  //         originRequestPolicy:
-  //           cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
-  //         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.HTTPS_ONLY,
-  //       },
-  //     },
-  //   );
-  // }
+  private createFrontendDistribution(props: CloudfrontConstructProps): void {
+    this.frontendDistribution = new cloudfront.Distribution(
+      this,
+      `${props.stage}-Cloudfront-Distribution-Frontend`,
+      {
+        defaultBehavior: {
+          origin: new origins.S3StaticWebsiteOrigin(props.frontendBucket),
+          cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
+          viewerProtocolPolicy:
+            cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        },
+      },
+    );
+  }
+  
+  private createApiDistribution(props: CloudfrontConstructProps): void {
+    this.apiDistribution = new cloudfront.Distribution(
+      this,
+      `${props.stage}-Cloudfront-Distribution-Api`,
+      {
+        defaultBehavior: {
+          origin: new origins.HttpOrigin(
+            cdk.Fn.select(2, cdk.Fn.split("/", props.apiEndpoint)),
+            {
+              originPath: "/",
+            },
+          ),
+          cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+          allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+          originRequestPolicy:
+            cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
+          viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.HTTPS_ONLY,
+        },
+      },
+    );
+  }
 }

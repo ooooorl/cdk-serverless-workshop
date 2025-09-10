@@ -9,16 +9,16 @@ export class StatefulStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: StatefulStackProps) {
     super(scope, id, props);
 
-    // this.createDynamoDbConstruct(props);
+    this.createDynamoDbConstruct(props);
   }
 
-  // private createDynamoDbConstruct(props: StatefulStackProps): void {
-  //   this.dynamoDbConstruct = new DynamoDbConstruct(
-  //     this,
-  //     `${props.stage}-DynamoDbConstruct`,
-  //     {
-  //       stage: props.stage,
-  //     },
-  //   );
-  // }
+  private createDynamoDbConstruct(props: StatefulStackProps): void {
+    this.dynamoDbConstruct = new DynamoDbConstruct(
+      this,
+      `${props.stage}-DynamoDbConstruct`,
+      {
+        stage: props.stage,
+      },
+    );
+  }
 }

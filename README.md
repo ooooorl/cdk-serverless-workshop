@@ -1,4 +1,4 @@
-# 🚀 Workshop Challenge: AWS CDK + GitHub Actions
+<!-- # 🚀 Workshop Challenge: AWS CDK + GitHub Actions
 
 Welcome to the **DevOps Workshop Challenge**! 🎉
 Your mission is to build and deploy a **ToDo application** using **React (frontend)** and a **serverless backend** (API Gateway + Lambda + DynamoDB), all provisioned with **AWS CDK** and deployed automatically with **GitHub Actions CI/CD pipelines**.
@@ -90,4 +90,4 @@ By the end of this challenge, you should have:
 
 ---
 
-⚡ At the end, we’ll have a **showcase session** — where each group will demo their deployed ToDo app running live on AWS!
+⚡ At the end, we’ll have a **showcase session** — where each group will demo their deployed ToDo app running live on AWS! -->
